@@ -593,7 +593,13 @@ local function unpack_map (c, n)
     local decode = unpackers['any']
     for i = 1, n do
         local k = decode(c)
-        t[k] = decode(c)
+        local val = decode(c)
+        if k == nil then
+            k = m.sentinel
+        end
+        if k ~= nil then
+            t[k] = val
+        end
     end
     return t
 end

@@ -29,6 +29,7 @@ install:
 # Build and test.
 script:
   - make luacheck
+  - make LUA=lua$LUASUFFIX test
   - make LUA=lua$LUASUFFIX coveralls
 
 branches:
