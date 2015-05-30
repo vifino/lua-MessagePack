@@ -81,11 +81,11 @@
 The valid options are <code>'double'</code>, <code>'float'</code> and <code>'integer'</code>.
 The default is <em>usually</em> <code>'double'</code>.</p>
 
-<h4><code>set_integer( str )</code></h4>
+<h4><code>set_integer( str )</code> <strong>DEPRECATED</strong></h4>
 
 <p>Configures the behaviour of <code>pack</code>.
 The valid options are <code>'signed'</code> and <code>'unsigned'</code>.
-The default is <code>'signed'</code>.</p>
+The default is <code>'unsigned'</code>.</p>
 
 <h4><code>set_array( str )</code></h4>
 
@@ -167,7 +167,6 @@ return mp
 local mp = require 'MessagePack'
 
 mp.set_number'float'
-mp.set_integer'unsigned'
 mp.set_array'with_hole'
 mp.set_string'string'
 
