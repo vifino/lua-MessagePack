@@ -165,8 +165,47 @@ end
 return mp
 </pre>
 
+<h3>Advanced usages</h3>
+
+<p>The following Lua hack allows to have several instances of the module
+<strong>MessagePack</strong>, each one with its own settings.</p>
+
+<pre class="example">
+local mp1 = require 'MessagePack'
+package.loaded['MessagePack'] = nil     -- the hack is here
+local mp2 = require 'MessagePack'
+
+mp1.set_array'without_hole'
+mp2.set_array'always_as_map'
+</pre>
+
+<p>When global settings are not enough, the following recipe allows
+to use a specific encoding for only a part of a data structure.</p>
+
+<pre class="example">
+local mp = require 'MessagePack'
+mp.packers['function'] = function (buffer, fct)
+    fct(buffer)
+end
+
+local function BINARY (str)
+    return function (buffer)
+        mp.packers['binary'](buffer, str)
+    end
+end
+
+local function FLOAT (n)
+    return function (buffer)
+        mp.packers['float'](buffer, n)
+    end
+end
+
+mp.pack { 'encoded_with_global_settings', BINARY'encoded_as_binary', 42, FLOAT(42) }
+</pre>
 
 <h2><a name="examples"></a>Examples</h2>
+
+<p>Basic usage</p>
 
 <pre class="example">
 local mp = require 'MessagePack'
