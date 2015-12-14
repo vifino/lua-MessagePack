@@ -446,7 +446,7 @@ packers['double'] = function (buffer, n)
         mant = (mant * 2.0 - 1.0) * ldexp(0.5, 53)
         buffer[#buffer+1] = char(0xCB,
                                  sign + floor(expo / 0x10),
-                                 (expo % 0x10) * 0x10 + floor(mant / 0x1000000000000),
+                                 (expo % 0x10) * 0x10 + floor(mant / 0x1000000000000) % 0x10,
                                  floor(mant / 0x10000000000) % 0x100,
                                  floor(mant / 0x100000000) % 0x100,
                                  floor(mant / 0x1000000) % 0x100,
