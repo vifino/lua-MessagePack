@@ -11,8 +11,13 @@ local nan = mp.unpack(mp.pack(0/0))
 type_ok( nan, 'number', "nan" )
 ok( nan ~= nan )
 is( mp.unpack(mp.pack(3.140625)), 3.140625, "3.140625" )
+
 mp.set_number'double'
-is( mp.unpack(mp.pack(math.pi)), math.pi, "pi" )
+if _VERSION >= 'Lua 5.3' and #string.pack('n', 0.0) > 8 then
+    skip("long double", 1)
+else
+    is( mp.unpack(mp.pack(math.pi)), math.pi, "pi" )
+end
 
 mp.set_integer'signed'
 is( mp.unpack(mp.pack(2^5)), 2^5, "2^5" )
