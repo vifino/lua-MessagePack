@@ -13,7 +13,7 @@ ok( nan ~= nan )
 is( mp.unpack(mp.pack(3.140625)), 3.140625, "3.140625" )
 
 mp.set_number'double'
-if _VERSION >= 'Lua 5.3' and #string.pack('n', 0.0) > 8 then
+if mp.longdouble then
     skip("long double", 1)
 else
     is( mp.unpack(mp.pack(math.pi)), math.pi, "pi" )
